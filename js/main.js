@@ -47,4 +47,44 @@ window.addEventListener("scroll", () => {
   if (sectionTop < window.innerHeight - 100) {
     animateStats();
   }
+
+});
+// FORM SUBMIT WITH MODAL
+const form = document.getElementById("contactForm");
+const successModal = document.getElementById("successModal");
+const closeModal = document.getElementById("closeModal");
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  fetch(form.action, {
+    method: "POST",
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      successModal.classList.add("active");
+      form.reset();
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  })
+  .catch(() => {
+    alert("Network error. Please try again.");
+  });
+});
+
+closeModal.addEventListener("click", () => {
+  successModal.classList.remove("active");
+});
+
+successModal.addEventListener("click", (e) => {
+  if (e.target === successModal) {
+    successModal.classList.remove("active");
+  }
 });
