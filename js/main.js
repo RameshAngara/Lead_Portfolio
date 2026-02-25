@@ -81,10 +81,12 @@ form.addEventListener("submit", function(e) {
 
 closeModal.addEventListener("click", () => {
   successModal.classList.remove("active");
+  window.location.reload();
 });
 
 successModal.addEventListener("click", (e) => {
   if (e.target === successModal) {
-    successModal.classList.remove("active");
+    window.location.reload();
   }
 });
+
